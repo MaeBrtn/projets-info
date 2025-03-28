@@ -10,6 +10,6 @@ Pour son fonctionnement, il nécéssite d'ouvrir des images présentes dans les 
 
 Projet - Can't Stop :
 
-Le projet Can't Stop a été réalsié en autonomie au second semestre, puisque j'aimais beaucoup ce jeu et voulait le coder moi-même. Il n'est pour l'instant pas fini, puisqu'il reste des bugs que je dois corriger avant d'obtenir un jeu totalement fonctionnel et jouable compte tenu de mon avancée sur le projet. A l'avenir, j'aimerais coder un menu, comme le premier projet, dans lequel l'utilisateur pourrait choisir l'image de fond, le nombre de joueurs, leurs couleurs respectives etc. au lieu de le rentrer manuellement dans la console.
+Le projet Can't Stop a été réalisé en autonomie au second semestre, puisque j'aimais beaucoup ce jeu et voulait le coder moi-même. Il n'est pour l'instant pas fini, puisqu'il reste des bugs que je dois corriger avant d'obtenir un jeu totalement fonctionnel et jouable compte tenu de mon avancée sur le projet. A l'avenir, j'aimerais coder un menu, comme le premier projet, dans lequel l'utilisateur pourrait choisir l'image de fond, le nombre de joueurs, leurs couleurs respectives etc. au lieu de le rentrer manuellement dans la console.
 
 Pour son fonctionnement, il nécéssite également d'ouvrir des images présentes dans les dossiers, qu'il faut avoir téléchagré au préalable. Ici aussi, je ferais de mon mieux pour rendre ces images accessibles sur GitHub dans les plus brefs délais.
