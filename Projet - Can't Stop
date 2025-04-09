@@ -5,13 +5,9 @@ from random import randint
 # a chaque lancer de des mettre dans l'espace manquant une case tips avec des tips nuls/un camera roll d'images à choisir au préalable
 
 #PROBLEMES A REGLER
-#) régler le problème récent qui fait dysfonctionner le programme
-
-#) bloquer les lignes quand elles sont finies
-
 #) décaler les pions d'un petit peu s'il y en a 2 sur la même case pour pas qu'ils se chevauchent visuellement
 
-#) s'il reste plus de pions un 8-8 avancera qu'une fois sur 8
+#) une avancée double (uniquement quand il ne reste plus de pions en stock) avance qu'une fois, le bug est rapide à régler je crois
 
 #) permettre le choix des couleurs
 #---------idees---------
@@ -175,27 +171,31 @@ def blocs_possib(lst, nb_pions, lst_splice, lst_pions, criteras):
                     if criteras[2]==1:
                         if criteras[3]==True:
                             if criteras[4]==1:
-                                fltk.rectangle(100, 680, 190, 750, couleur='black', remplissage= 'green' , epaisseur=5, tag='rectangle_possib_1')
-                                fltk.rectangle(210, 680, 300, 750, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
-                                fltk.texte(145, 713, f'{lst[0][0]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
-                                fltk.texte(255, 713, f'{lst[0][1]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
-                                wrongline_split=True
+                                if uno==False:
+                                    fltk.rectangle(100, 680, 190, 750, couleur='black', remplissage= 'green' , epaisseur=5, tag='rectangle_possib_1')
+                                    fltk.rectangle(210, 680, 300, 750, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
+                                    fltk.texte(145, 713, f'{lst[0][0]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
+                                    fltk.texte(255, 713, f'{lst[0][1]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
+                                    wrongline_split=True
                             elif criteras[4]==2:
-                                fltk.rectangle(100, 680, 190, 750, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
-                                fltk.rectangle(210, 680, 300, 750, couleur='black', remplissage= 'green' , epaisseur=5, tag='rectangle_possib_1')
-                                fltk.texte(145, 713, f'{lst[0][0]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
-                                fltk.texte(255, 713, f'{lst[0][1]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
-                                wrongline_split=True
-                            lst_splice[0]=True
-                            end=True
+                                if uno==False:
+                                    fltk.rectangle(100, 680, 190, 750, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
+                                    fltk.rectangle(210, 680, 300, 750, couleur='black', remplissage= 'green' , epaisseur=5, tag='rectangle_possib_1')
+                                    fltk.texte(145, 713, f'{lst[0][0]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
+                                    fltk.texte(255, 713, f'{lst[0][1]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
+                                    wrongline_split=True
+                            if uno==False:
+                                lst_splice[0]=True
+                                end=True
                 jsp=criteras[0] and wrongline_split
                 if jsp==False:
-                    fltk.rectangle(100, 680, 190, 750, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
-                    fltk.rectangle(210, 680, 300, 750, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
-                    fltk.texte(145, 713, f'{lst[0][0]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
-                    fltk.texte(255, 713, f'{lst[0][1]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
-                    lst_splice[0]=True
-                    end=True
+                    if uno==False:
+                        fltk.rectangle(100, 680, 190, 750, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
+                        fltk.rectangle(210, 680, 300, 750, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
+                        fltk.texte(145, 713, f'{lst[0][0]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
+                        fltk.texte(255, 713, f'{lst[0][1]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
+                        lst_splice[0]=True
+                        end=True
         if end==False:
             if criteras[0]==True:
                 if criteras[2]==1:
@@ -234,27 +234,31 @@ def blocs_possib(lst, nb_pions, lst_splice, lst_pions, criteras):
                     if criteras[2]==2:
                         if criteras[3]==True:
                             if criteras[4]==1:
-                                fltk.rectangle(100, 580, 190, 650, couleur='black', remplissage= 'green', epaisseur=5, tag='rectangle_possib_1')
-                                fltk.rectangle(210, 580, 300, 650, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
-                                fltk.texte(145, 613, f'{lst[1][0]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
-                                fltk.texte(255, 613, f'{lst[1][1]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
-                                wrongline_split=True
+                                if uno==False:
+                                    fltk.rectangle(100, 580, 190, 650, couleur='black', remplissage= 'green', epaisseur=5, tag='rectangle_possib_1')
+                                    fltk.rectangle(210, 580, 300, 650, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
+                                    fltk.texte(145, 613, f'{lst[1][0]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
+                                    fltk.texte(255, 613, f'{lst[1][1]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
+                                    wrongline_split=True
                             elif criteras[4]==2:
-                                fltk.rectangle(100, 580, 190, 650, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
-                                fltk.rectangle(210, 580, 300, 650, couleur='black', remplissage= 'green', epaisseur=5, tag='rectangle_possib_1')
-                                fltk.texte(145, 613, f'{lst[1][0]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
-                                fltk.texte(255, 613, f'{lst[1][1]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
-                                wrongline_split=True
-                            lst_splice[1]=True
-                            end=True
+                                if uno==False:
+                                    fltk.rectangle(100, 580, 190, 650, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
+                                    fltk.rectangle(210, 580, 300, 650, couleur='black', remplissage= 'green', epaisseur=5, tag='rectangle_possib_1')
+                                    fltk.texte(145, 613, f'{lst[1][0]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
+                                    fltk.texte(255, 613, f'{lst[1][1]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
+                                    wrongline_split=True
+                            if uno==False:
+                                lst_splice[1]=True
+                                end=True
                 jsp=criteras[0] and wrongline_split
                 if jsp==False:
-                    fltk.rectangle(100, 580, 190, 650, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
-                    fltk.rectangle(210, 580, 300, 650, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
-                    fltk.texte(145, 613, f'{lst[1][0]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
-                    fltk.texte(255, 613, f'{lst[1][1]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
-                    lst_splice[1]=True
-                    end=True
+                    if uno==False:
+                        fltk.rectangle(100, 580, 190, 650, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
+                        fltk.rectangle(210, 580, 300, 650, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
+                        fltk.texte(145, 613, f'{lst[1][0]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
+                        fltk.texte(255, 613, f'{lst[1][1]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
+                        lst_splice[1]=True
+                        end=True
         if end==False:
             if criteras[0]==True:
                 if criteras[2]==2:
@@ -294,27 +298,31 @@ def blocs_possib(lst, nb_pions, lst_splice, lst_pions, criteras):
                     if criteras[2]==3:
                         if criteras[3]==True:
                             if criteras[4]==1:
-                                fltk.rectangle(100, 480, 190, 550, couleur='black', remplissage= 'green' , epaisseur=5, tag='rectangle_possib_1')
-                                fltk.rectangle(210, 480, 300, 550, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
-                                fltk.texte(145, 513, f'{lst[2][0]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
-                                fltk.texte(255, 513, f'{lst[2][1]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
-                                wrongline_split=True
+                                if uno==False:
+                                    fltk.rectangle(100, 480, 190, 550, couleur='black', remplissage= 'green' , epaisseur=5, tag='rectangle_possib_1')
+                                    fltk.rectangle(210, 480, 300, 550, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
+                                    fltk.texte(145, 513, f'{lst[2][0]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
+                                    fltk.texte(255, 513, f'{lst[2][1]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
+                                    wrongline_split=True
                             elif criteras[4]==2:
-                                fltk.rectangle(100, 480, 190, 550, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
-                                fltk.rectangle(210, 480, 300, 550, couleur='black', remplissage= 'green' , epaisseur=5, tag='rectangle_possib_1')
-                                fltk.texte(145, 513, f'{lst[2][0]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
-                                fltk.texte(255, 513, f'{lst[2][1]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
-                                wrongline_split=True
-                            lst_splice[2]=True
-                            end=True
+                                if uno==False:
+                                    fltk.rectangle(100, 480, 190, 550, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
+                                    fltk.rectangle(210, 480, 300, 550, couleur='black', remplissage= 'green' , epaisseur=5, tag='rectangle_possib_1')
+                                    fltk.texte(145, 513, f'{lst[2][0]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
+                                    fltk.texte(255, 513, f'{lst[2][1]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
+                                    wrongline_split=True
+                            if uno==False:
+                                lst_splice[2]=True
+                                end=True
                 jsp= criteras[0] and wrongline_split
                 if jsp==False:
-                    fltk.rectangle(100, 480, 190, 550, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
-                    fltk.rectangle(210, 480, 300, 550, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
-                    fltk.texte(145, 513, f'{lst[2][0]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
-                    fltk.texte(255, 513, f'{lst[2][1]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
-                    lst_splice[2]=True
-                    end=True
+                    if uno==False:
+                        fltk.rectangle(100, 480, 190, 550, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
+                        fltk.rectangle(210, 480, 300, 550, couleur='black', remplissage='white', epaisseur=5, tag='rectangle_possib_1')
+                        fltk.texte(145, 513, f'{lst[2][0]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
+                        fltk.texte(255, 513, f'{lst[2][1]}', taille = 35, ancrage = 'center', police='impact', tag = 'texte_possib_1')
+                        lst_splice[2]=True
+                        end=True
         if end==False:
             if criteras[0]==True:
                 if criteras[2]==3:
@@ -367,20 +375,22 @@ def bloc_continuer_cours(lst):
     return factor
 
 
-def actualise_pions(joueur, couleurs_joueurs, lst_scores):
+def actualise_pions(lst_joueurs, couleurs_joueurs, lst_scores):
     fltk.efface('pion_tour')
     i=2
     for jsp in range(11):
-        fltk.efface(f'pion_joueur_{joueur}_ligne_{i}')
+        fltk.efface(f'pion_ligne_{i}')
         i+=1
-    i=0
-    for elt in lst_scores[joueur]:
-        if elt!=0:
-            fltk.cercle(530+100*i, 955-(75*(lst_scores[joueur][i]-1)), 25 , remplissage=couleurs_joueurs[joueur], epaisseur = 1.5 , tag = f'pion_joueur_{joueur}_ligne_{i+2}')
-        i+=1
+        
+    for joueur in lst_joueurs:
+        i=0
+        for elt in lst_scores[joueur]:
+            if elt!=0:
+                fltk.cercle(530+100*i, 955-(75*(lst_scores[joueur][i]-1)), 25 , remplissage=couleurs_joueurs[joueur], epaisseur = 1.5 , tag = f'pion_ligne_{i+2}')
+            i+=1
 
 
-def bloc_continuer_fin(continuer, joueur, couleurs_joueurs, lst_scores, score_neutral, lignes_finies, lst_scores_finaux):
+def bloc_continuer_fin(continuer, joueur, couleurs_joueurs, lst_scores, score_neutral, lignes_finies, lst_scores_finaux, lst_joueurs):
     if continuer==True:
         fltk.efface('continuer_tour')
         fltk.rectangle(20, 880, 180, 980, couleur='black', remplissage='green', epaisseur=10, tag='continuer_tour_2')
@@ -404,12 +414,11 @@ def bloc_continuer_fin(continuer, joueur, couleurs_joueurs, lst_scores, score_ne
                             lst_scores[joueur][i]+=score_neutral[i]
                         i+=1
                     
-                    lst_wincon = wincon(joueur, lst_scores, couleurs_joueurs)
-                    
-                    colorie_les_lignes(lst_wincon, lignes_finies, lst_scores_finaux, lst_scores)
+                    #lst_wincon = wincon(joueur, lst_scores, couleurs_joueurs)
+                    colorie_les_lignes_2(lst_scores, lst_joueurs, couleurs_joueurs, lignes_finies, lst_scores_finaux)
                     
                     fltk.efface('continuer_tour_2')
-                    actualise_pions(joueur, couleurs_joueurs, lst_scores)
+                    actualise_pions(lst_joueurs, couleurs_joueurs, lst_scores)
                     return False            
     if continuer==False:
         yes = True
@@ -542,34 +551,17 @@ def avancer_colonne(possib, div, score_neutral, split, nb_split, lst_pions, nb_p
     return nb_pions
         
 
-def lock_des_lignes(score_neutral, joueur, lst_score, lignes_lock):
+def lock_des_lignes(score_neutral, joueur, lst_scores, lignes_lock):
     terminade=False
     i=3
     indice=2
     for elt in score_neutral:
-        if elt>0:
-            truc=(lst_scores[joueur][indice-2])+elt
+        if score_neutral[indice-2]>0:
+            truc=(lst_scores[joueur][indice-2])+score_neutral[indice-2]
             if truc>=i:
                 if indice not in lignes_lock:
                     lignes_lock.append(indice)
-            if i==13:
-                terminade=True
-            if terminade==False:
-                i+=2
-            else:
-                i-=2
-        indice+=1
-
-
-
-def wincon(joueur, lst_scores, lst_couleurs):
-    lignes_finies=[]
-    terminade=False
-    i=3
-    indice=2
-    for elt in lst_scores[joueur]:
-        if elt>=i:
-            lignes_finies.append([indice, i])
+                    lignes_lock.append("apagnan")
         if i==13:
             terminade=True
         if terminade==False:
@@ -577,29 +569,38 @@ def wincon(joueur, lst_scores, lst_couleurs):
         else:
             i-=2
         indice+=1
-    return [lignes_finies, joueur, lst_couleurs[joueur]]
 
 
+def colorie_les_lignes_2(score_joueurs, lst_joueurs, lst_couleurs, lignes_finies, lst_scores_finaux):
+    for joueur in lst_joueurs:
+        terminade=False
+        indice=2
+        i=3
+        for elt in score_joueurs[joueur]:
+            if score_joueurs[joueur][indice-2]>=i:
+                big_ali=0
+                for jsp in lst_joueurs:
+                    score_joueurs[big_ali][indice-2]=0
+                    big_ali+=1
+                score_joueurs[joueur][indice-2]=i
+                fltk.efface(f'pion_ligne_{indice}')
+                if indice not in lignes_finies:
+                    lignes_finies.append(indice)
+                    lst_scores_finaux[joueur]+=1
+                i2=0
+                for jsp in range(i):
+                    fltk.cercle(530+100*(indice-2), 955-75*i2, 25 , remplissage=lst_couleurs[joueur], epaisseur = 1.5 , tag = 'pion_fini')
+                    i2+=1
+                    
+            indice+=1
+            if i==13:
+                terminade=True
+            if terminade==False:    
+                i+=2
+            else:
+                i-=2
 
-def colorie_les_lignes(para, lignes_finies, lst_scores_finaux, lst_scores):
-    if len(para[0])>0:
-        pedro=0
-        for elt in para[0]:
-            if para[0][pedro][0] not in lignes_finies:
-                ijoueur=0
-                for jsptrop in range(len(lst_scores)):
-                    fltk.efface(f'pion_joueur_{ijoueur}_ligne_{para[0][pedro][0]}')
-                    ijoueur+=1
-                i=0
-                for jsp in range(para[0][pedro][1]):
-                    fltk.cercle(530+100*((para[0][pedro][0])-2), 955-75*i, 25 , remplissage=para[2], epaisseur = 1.5 , tag = 'pion_fini')
-                    i+=1
-                lignes_finies.append(elt[0])
-                lst_scores_finaux[para[1]]+=1
-                
-                for joueur in lst_scores:
-                    lst_scores[para[0][pedro][0]]=0
-            pedro+=1
+
 
 
 #---------options---------
@@ -694,9 +695,9 @@ while finir==False:
     while continuer==True:   
         des_tour=lancer_des()
         les_des_sur_lecran(des_tour)
-        print(des_tour)
+        print(f'des {des_tour}')
         possibilites=lst_possib(des_tour)
-        print(possibilites)
+        print(f'possibilites {possibilites}')
         
         #actualisation pendant une manche si le mec est monté trop haut
         lock_des_lignes(score_neutral, joueur_actif, lst_scores, lignes_lock)
@@ -720,11 +721,11 @@ while finir==False:
                 i+=1
             i=0
             i2=0
-        print(possibilites)
-        print(lst_lock)
+        print(f'possibilites apres {possibilites}')
+        print(f'lst lock {lst_lock}')
 
         lst_pablo=blocs_possib(possibilites, nb_pions, lst_splice, lst_pions, [False, "white", None, None, None])
-        print(lst_pablo)
+        print(f'lst pablo {lst_pablo}')
         
         faut_il_continuer=bloc_continuer_cours(possibilites)
         if faut_il_continuer==True:
@@ -734,11 +735,11 @@ while finir==False:
             success=False
 
 
-        print(score_neutral)
-        print(nb_pions)
-        print(lst_pions)
-        continuer=bloc_continuer_fin(success, joueur_actif, couleurs_joueurs, lst_scores, score_neutral, lignes_finies, lst_scores_finaux)
-        
+        print(f'score neutral {score_neutral}')
+        print(f'nb pions {nb_pions}')
+        print(f'lst pions {lst_pions}')
+        continuer=bloc_continuer_fin(success, joueur_actif, couleurs_joueurs, lst_scores, score_neutral, lignes_finies, lst_scores_finaux, lst_joueurs)
+        print(f'lignes finies {lignes_finies}')
         if continuer==False:
             i=0
             for elt in lst_scores_finaux:
