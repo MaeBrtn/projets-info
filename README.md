@@ -12,7 +12,7 @@ Il est également nécéssaire de télécharger la bibliothèque graphique fltk 
 
 Projet - Can't Stop :  (pas encore fini)
 
-Le projet Can't Stop a été réalisé en autonomie au second semestre, puisque j'aimais beaucoup ce jeu et voulait le coder moi-même. Il n'est pour l'instant pas fini, puisqu'il reste des bugs que je dois corriger avant d'obtenir un jeu totalement fonctionnel et jouable compte tenu de mon avancée sur le projet. A l'avenir, j'aimerais coder un menu, comme le premier projet, dans lequel l'utilisateur pourrait choisir l'image de fond, le nombre de joueurs, leurs couleurs respectives etc. au lieu de le rentrer manuellement dans la console.
+Le projet Can't Stop a été réalisé en autonomie au second semestre, puisque j'aimais beaucoup ce jeu et voulait le coder moi-même. Il n'est pour l'instant pas fini, mais je viens d'en arriver à une version totalement fonctionelle en somme. Il me reste un bug mineur à régler dessus avant d'obtenir une copie conforme du jeu de plateau. A l'avenir, j'aimerais coder un menu, comme le premier projet, dans lequel l'utilisateur pourrait choisir l'image de fond, le nombre de joueurs, leurs couleurs respectives etc. au lieu de le rentrer manuellement dans la console.
 
 Pour son fonctionnement, il est également nécéssaire d'ouvrir des images présentes dans les dossiers, qu'il faut avoir téléchargé au préalable. Ici aussi, j'ai lié les images dans une branche nommée "Images---Can't-Stop" sur GitHub. Il faut alors télécharger ces images dans le même dossier que le programme (sans les renommer) pour l'utiliser.
 
