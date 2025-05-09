@@ -2,12 +2,14 @@ import fltk
 from random import randint
 
 #---------idees---------
-# a chaque lancer de des mettre dans l'espace manquant une case tips avec des tips nuls/un camera roll d'images à choisir au préalable
+# a chaque lancer de des mettre dans l'espace manquant une case tips avec des tips ou alors un camera roll d'images
 
 #PROBLEMES A REGLER
 #) décaler les pions d'un petit peu s'il y en a 2 sur la même case pour pas qu'ils se chevauchent visuellement
 
-#) une avancée double (uniquement quand il ne reste plus de pions en stock) avance qu'une fois, le bug est rapide à régler je crois
+#) on peut visuellement monter au dessus de la limite si on a un doublé à une case de finir, c'est juste visuel ça change en rien les pions
+
+#) lors d'un split on peut techniquement cliquer entre les 2 splits, ça casse tout le jeu et on est en god mode sans limite de pions gg
 
 #) permettre le choix des couleurs
 #---------idees---------
@@ -434,7 +436,7 @@ def bloc_continuer_fin(continuer, joueur, couleurs_joueurs, lst_scores, score_ne
 #---------fonction-des-blocs-----------
     
 #---------options---------
-def options_tour(lst, lst_pablo, score_neutral, nb_pions, lst_splice, lst_pions, score_joueurs, joueur_actif):
+def options_tour(lst, lst_pablo, score_neutral, nb_pions, lst_splice, lst_pions, score_joueurs, joueur_actif, lst_lock):
     yes = True
     while yes:
         ev = fltk.attend_ev()
@@ -500,16 +502,12 @@ def avancer_colonne(possib, div, score_neutral, split, nb_split, lst_pions, nb_p
         if split==True:
             score_neutral[(possib[div][nb_split])-2]+=1
             deja=False
-            if len(lst_pions)==0:
+            for elt in lst_pions:
+                if elt==possib[div][nb_split]:
+                    deja=True
+            if deja==False:
                 lst_pions.append(possib[div][nb_split])
                 nb_pions-=1
-            else:
-                for elt in lst_pions:
-                    if elt==possib[div][nb_split]:
-                        deja=True
-                if deja==False:
-                    lst_pions.append(possib[div][nb_split])
-                    nb_pions-=1
                     
         else:
             score_neutral[(possib[div][0])-2]+=1
@@ -527,27 +525,32 @@ def avancer_colonne(possib, div, score_neutral, split, nb_split, lst_pions, nb_p
                     lst_pions.append(possib[div][0])
                     nb_pions-=1
                 
-            deja=False
-            if len(lst_pions)==0:
+            deja=False         
+            for elt in lst_pions:
+                if elt==possib[div][1]:
+                    deja=True
+            if deja==False:
                 lst_pions.append(possib[div][1])
-                nb_pions-=1            
-            else:
-                for elt in lst_pions:
-                    if elt==possib[div][1]:
-                        deja=True
-                if deja==False:
-                    lst_pions.append(possib[div][1])
-                    nb_pions-=1
+                nb_pions-=1
             
     else:
-        score_neutral[(possib[div][0])-2]+=1            
+        score_neutral[(possib[div][0])-2]+=1
+        
+        deja=False         
+        for elt in lst_pions:
+            if elt==possib[div][0]:
+                deja=True
+        if deja==False:
+            lst_pions.append(possib[div][0])
+            nb_pions-=1
+        
     
     i=0
     for elt in score_neutral:
         if elt != 0:
             fltk.cercle(525+100*i, (950-75*score_neutral[i]+75)-(75*score_joueurs[joueur_actif][i]), 25 , remplissage ='black', epaisseur = 1.5 , tag = 'pion_tour')
         i+=1
-    
+    print(f'OLALA A LA FIN {score_neutral}')
     return nb_pions
         
 
@@ -690,9 +693,10 @@ while finir==False:
     lst_pions=[]
     nb_pions=3
     dejafait=False
-    lst_splice=[False, False, False]
+    #lst_splice=[False, False, False]
     score_neutral=[0,0,0,0,0,0,0,0,0,0,0]
-    while continuer==True:   
+    while continuer==True:
+        lst_splice=[False, False, False]
         des_tour=lancer_des()
         les_des_sur_lecran(des_tour)
         print(f'des {des_tour}')
@@ -729,7 +733,7 @@ while finir==False:
         
         faut_il_continuer=bloc_continuer_cours(possibilites)
         if faut_il_continuer==True:
-            nb_pions=options_tour(possibilites, lst_pablo, score_neutral, nb_pions, lst_splice, lst_pions, lst_scores, joueur_actif)
+            nb_pions=options_tour(possibilites, lst_pablo, score_neutral, nb_pions, lst_splice, lst_pions, lst_scores, joueur_actif, lst_lock)
             success=True
         else:
             success=False
@@ -740,6 +744,7 @@ while finir==False:
         print(f'lst pions {lst_pions}')
         continuer=bloc_continuer_fin(success, joueur_actif, couleurs_joueurs, lst_scores, score_neutral, lignes_finies, lst_scores_finaux, lst_joueurs)
         print(f'lignes finies {lignes_finies}')
+        print('.')
         if continuer==False:
             i=0
             for elt in lst_scores_finaux:
@@ -749,3 +754,6 @@ while finir==False:
                 i+=1
 
 print(f'LA PARTIE EST FINIE! LE GAGNANT EST {couleurs_joueurs[joueur_gagnant]} !!!!')
+            
+        
+
